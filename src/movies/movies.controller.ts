@@ -26,7 +26,6 @@ export class MoviesController {
     @Query('year') searchingYear: string,
     // @Query('director') director: string,
   ) {
-    // return `We are searching for mvoies made after year: ${searchingYear}, director: ${director}`;
     return `We are searching for mvoies made after year: ${searchingYear}`;
   }
 
@@ -46,11 +45,7 @@ export class MoviesController {
   }
 
   @Patch(':id')
-  patch(@Param('id') movieId: string, @Body() updateData): string {
-    console.log(updateData);
-    return {
-      updatedMovie: movieId,
-      ...updateData,
-    };
+  patch(@Param('id') movieId: string, @Body() updateData): boolean {
+    return this.moviesService.update(movieId, updateData);
   }
 }
